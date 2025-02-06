@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Test Docker Image
           command: |
-            docker run -d --name my-app $DOCKER_IMAGE:latest --rm
+            docker run -d --name my-app --rm -p 8080:8080 $DOCKER_IMAGE:latest 
             curl http://localhost:8080
             docker stop my-app
       - run:
