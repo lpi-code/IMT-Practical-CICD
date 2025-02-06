@@ -1,29 +1,20 @@
 version: 2.1
+orbs:
+  docker: circleci/docker@1.7.0
 
 jobs:
   build_test_push:
-    machine:
-      image: ubuntu-2204:current  # Use a machine executor with Ubuntu
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
     steps:
-      - checkout  # Checkout the source code
-      - run:
-          name: Build Docker Image
-          command: |
-            docker build -t $DOCKER_IMAGE:latest .
-      
-
-      - run:
-          name: Test Docker Image
-          command: |
-            docker run -d --name my-app --rm -p 8080:8080 $DOCKER_IMAGE:latest
-            sleep 5
-            curl http://localhost:8080
-            docker stop my-app
-      - run:
-          name: Push Docker Image
-          command: |
-            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-            docker push $DOCKER_IMAGE:latest
+      - docker/build:
+          lint-dockerfile: false 
+          debug: false 
+          image: $DOCKER_IMAGE 
+          treat-warnings-as-errors: false 
+      - docker/push:
+          image: $DOCKER_IMAGE 
   
 workflows:
   version: 2
