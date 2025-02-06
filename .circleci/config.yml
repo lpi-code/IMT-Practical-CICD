@@ -4,8 +4,8 @@ orbs:
   docker: circleci/docker@1.7.0
 executors:
   default:
-    docker:
-      - image: cimg/base:stable  # Or use cimg/python, cimg/node, etc., as per your project needs
+    machine:
+      image: ubuntu-2204:current
 
 workflows:
   version: 2
