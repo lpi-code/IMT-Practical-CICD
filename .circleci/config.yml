@@ -8,13 +8,10 @@ jobs:
       # replace with your preferred image
       - image: cimg/base:stable
     steps:
-      - docker/build:
-          lint-dockerfile: false 
-          debug: false 
-          image: $DOCKER_IMAGE 
-          treat-warnings-as-errors: false 
-      - docker/push:
-          image: $DOCKER_IMAGE 
+      - docker/publish:
+            deploy: true 
+            docker-username: DOCKER_USERNAME 
+            image: $DOCKER_IMAGE 
   
 workflows:
   version: 2
