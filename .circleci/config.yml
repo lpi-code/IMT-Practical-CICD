@@ -1,11 +1,7 @@
 version: 2.1
 setup: true
 orbs:
-  docker: circleci/docker@1.7.0
-executors:
-  default:
-    machine:
-      image: ubuntu-2204:current
+  docker: circleci/docker@2.8.1
 
 workflows:
   version: 2
