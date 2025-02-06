@@ -6,11 +6,6 @@ jobs:
       image: ubuntu-2204:current  # Use a machine executor with Ubuntu
     steps:
       - checkout  # Checkout the source code
-      
-      - setup_remote_docker:
-          version: 20.10.18  # Enable Docker support
-          docker_layer_caching: true
-      
       - run:
           name: Build Docker Image
           command: |
