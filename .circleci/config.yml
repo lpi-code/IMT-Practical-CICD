@@ -2,19 +2,15 @@ version: 2.1
 setup: true
 orbs:
   docker: circleci/docker@1.7.0
-
-jobs:
-  build:
+executors:
+  default:
     docker:
       - image: cimg/base:stable  # Or use cimg/python, cimg/node, etc., as per your project needs
-    resource_class: medium  # Adjust if needed
-    steps:
-      - checkout
+
 workflows:
   version: 2
   build_push:
     jobs:
-      - build
       - docker/publish:
           deploy: true 
           docker-username: DOCKER_USERNAME 
